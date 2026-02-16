@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Resume Matcher</h1>
+        <p class="subtitle">Compare your resume against job descriptions</p>
+
+        <form action="/match" method="POST">
+            <div class="form-group">
+                <label for="resume">Your Resume</label>
+                <textarea
+                    id="resume"
+                    name="resume"
+                    rows="10"
+                    placeholder="Paste your resume here..."
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="job">Job Description</label>
+                <textarea
+                    id="job"
+                    name="job"
+                    rows="10"
+                    placeholder="Paste the job description here..."
+                    required
+                ></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">Analyze Match</button>
+        </form>
+    </div>
+</body>
+</html>

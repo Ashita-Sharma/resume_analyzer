@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Match Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>✨ AI-Powered Match Results</h1>
+
+        <div class="score-card">
+            <div class="score-circle {{ 'high' if result.final_score >= 70 else 'medium' if result.final_score >= 40 else 'low' }}">
+                <span class="score-number">{{ result.final_score }}%</span>
+            </div>
+            <p class="score-label">Overall Match Score</p>
+        </div>
+
+        <div class="score-breakdown">
+            <h2>📊 Score Breakdown</h2>
+            <div class="breakdown-grid">
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Semantic Similarity</span>
+                    <span class="breakdown-value">{{ result.semantic_score }}%</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Keyword Match</span>
+                    <span class="breakdown-value">{{ result.keyword_score }}%</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Skill Match</span>
+                    <span class="breakdown-value">{{ result.skill_match_rate }}%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>✅ Matched Skills ({{ result.matched_skills|length }})</h2>
+            <div class="keywords matched-keywords">
+                {% for skill in result.matched_skills %}
+                    <span class="keyword">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>❌ Missing Skills ({{ result.missing_skills|length }})</h2>
+            <p class="improvement-note">Add these to strengthen your application:</p>
+            <div class="keywords missing-keywords">
+                {% for skill in result.missing_skills %}
+                    <span class="keyword">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>Key Phrases</h2>
+            <div class="phrases">
+                <div class="phrase-column">
+                    <h3>Matched</h3>
+                    {% for kw in result.matched_keywords %}
+                        <div class="phrase-item matched">{{ kw }}</div>
+                    {% endfor %}
+                </div>
+                <div class="phrase-column">
+                    <h3>Missing</h3>
+                    {% for kw in result.missing_keywords %}
+                        <div class="phrase-item missing">{{ kw }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <a href="/" class="btn-secondary">Try Another Match</a>
+    </div>
+</body>
+</html>
